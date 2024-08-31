@@ -16,12 +16,14 @@ repositories {
 }
 
 dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.11.0")
     testImplementation(kotlin("test"))
 }
 
 tasks {
     test {
         useJUnitPlatform()
+
     }
 
     wrapper {
@@ -31,6 +33,7 @@ tasks {
     compileKotlin {
         compilerOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
+            optIn = listOf("kotlin.ExperimentalUnsignedTypes")
             jvmTarget = JvmTarget.JVM_22
         }
     }

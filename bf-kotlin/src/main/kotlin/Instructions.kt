@@ -20,6 +20,9 @@ fun readProgramFromPath(path: String): String {
     return programContent
 }
 
-data class Program(
-    private val program: String
-)
+class Instructions(private val program: String) {
+
+    val length = program.length
+
+    fun getInstruction(pointer: Int) = program[pointer]
+}

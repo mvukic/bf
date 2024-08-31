@@ -2,7 +2,6 @@
   <configuration default="false" name="Run" type="JetRunConfigurationType">
     <option name="MAIN_CLASS_NAME" value="com.github.mvukic.MainKt" />
     <module name="bf-kotlin.main" />
-    <option name="PROGRAM_PARAMETERS" value="..\programs\add-two-values.bf" />
     <shortenClasspath name="NONE" />
     <method v="2">
       <option name="Make" enabled="true" />

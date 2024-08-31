@@ -3,7 +3,7 @@ package com.github.mvukic
 import java.nio.file.Paths
 import kotlin.io.path.absolute
 
-fun getMemoryPath(args: Array<String>) = args.firstOrNull()
+fun getMemoryPath(args: Array<String>) = args.getOrNull(1)
 
 fun readMemoryFromPathOrDefault(path: String?, default: ByteArray): ByteArray {
     if (path == null) {
@@ -20,10 +20,17 @@ fun readMemoryFromPathOrDefault(path: String?, default: ByteArray): ByteArray {
     if (memoryContent.isEmpty()) {
         error("Empty memory")
     }
-    /// TODO: Read content of the array from the file
-    return ByteArray(memoryContent.length)
+    return memoryContent.split("").map { it.toByte() }.toByteArray()
 }
 
-data class Memory(
-    private val memory: ByteArray
-)
+class Memory(private val memory: ByteArray) {
+
+    fun get(pointer: Int) = memory.getOrNull(pointer) ?: error("Memory at pointer '$pointer' is null")
+
+    fun set(pointer: Int, value: Byte) {
+        memory[pointer] = value
+    }
+
+    override fun toString() = memory.joinToString("")
+
+}
