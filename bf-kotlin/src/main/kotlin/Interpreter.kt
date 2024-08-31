@@ -14,7 +14,7 @@ class Interpreter(
         while (true) {
             printStatus()
             // Read current instruction
-            val instruction = instructions.getInstruction(instructionPointer)
+            val instruction = instructions.get(instructionPointer)
             println("Instruction: $instruction")
 
             when (instruction) {
