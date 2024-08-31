@@ -26,11 +26,11 @@ jobs:
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
     - name: Make gradlew executable
+      working-directory: bf-kotlin
       run: chmod +x ./gradlew
-      working-directory: bf-kotlin
     - name: Build with Gradle Wrapper
-      run: ./bf-kotlin/gradlew test
       working-directory: bf-kotlin
+      run: ./gradlew test
 
   dependency-submission:
 
