@@ -2,6 +2,9 @@ package com.github.mvukic.printer
 
 import java.io.File
 
+/**
+ * A printer implementation that prints all messages to a file.
+ */
 class FilePrinter(path: String) : Printer {
 
     private val file = File(path)

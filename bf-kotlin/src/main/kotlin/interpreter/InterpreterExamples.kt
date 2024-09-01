@@ -25,25 +25,29 @@ object InterpreterExamples {
     /**
      * Empty program
      */
-    val NO_OP = Example(
+    val EXAMPLE_1 = Example(
         Program(""),
         Memory(byteArrayOf()),
         Registers(),
     )
 
     /**
+     * ```
      * memory[0] = memory[0] + 1
+     * ```
      */
-    val ADD_1 = Example(
+    val EXAMPLE_2 = Example(
         Program("+"),
         Memory(byteArrayOf(0)),
         Registers(),
     )
 
     /**
+     * ```
      * memory[0] = memory[0] + 2
+     * ```
      */
-    val ADD_2 = Example(
+    val EXAMPLE_3 = Example(
         Program("++"),
         Memory(byteArrayOf(0)),
         Registers(),
@@ -51,89 +55,99 @@ object InterpreterExamples {
     )
 
     /**
+     * ```
      * memory[0] = memory[0] + 1
-     *
      * memory[1] = memory[1] + 2
+     * ```
      */
-    val ADD_1_AND_2 = Example(
+    val EXAMPLE_4 = Example(
         Program("+>++"),
         Memory(byteArrayOf(0, 0)),
         Registers(),
     )
 
     /**
+     * ```
      * memory[0] = memory[0] + 1
-     *
      * memory[1] = memory[1] + 2
-     *
      * memory[2] = memory[2] + 1
+     * ```
      */
-    val ADD_1_AND_2_AND_1 = Example(
+    val EXAMPLE_5 = Example(
         Program("+>++>+"),
         Memory(byteArrayOf(0, 0, 0)),
         Registers(),
     )
 
     /**
+     * ```
      * memory[0] = memory[0] - 1
+     * ```
      */
-    val SUB_1 = Example(
+    val EXAMPLE_6 = Example(
         Program("-"),
         Memory(byteArrayOf(0)),
         Registers(),
     )
 
     /**
+     * ```
      * memory[0] = memory[0] + 4 - 2
-     *
      * memory[1] = memory[1] + 2 - 1
-     *
      * memory[2] = memory[2] + 2
+     * ```
      */
-    val SUB_ADD_MULTI = Example(
+    val EXAMPLE_7 = Example(
         Program("++++>++>++<<-->-"),
         Memory(byteArrayOf(0, 0, 0)),
         Registers(),
     )
 
     /**
+     * ```
      * memory[1] = memory[1] + memory[0]
-     *
      * memory[0] = 0
+     * ```
      */
-    val ADD_FIRST_TO_SECOND = Example(
+    val EXAMPLE_8 = Example(
         Program("[->+<]"),
         Memory(byteArrayOf(1, 0)),
         Registers(),
     )
 
     /**
+     * ```
      * Prints memory[0]
+     * ```
      */
-    val PRINT_1 = Example(
-        Program("."),
+    val EXAMPLE_9 = Example(
+        Program("+."),
         Memory(byteArrayOf(0)),
         Registers(),
     )
 
     /**
+     * ```
      * memory[0] = memory[0] + 1
-     * Prints memory[0]
+     * Print memory[0]
      * memory[1] = memory[1] + 2
-     * Prints memory[1]
+     * Print memory[1]
+     * ```
      */
-    val ADD_1_AND_2_AND_PRINT_ALL = Example(
+    val EXAMPLE_10 = Example(
         Program("+.>++."),
         Memory(byteArrayOf(0, 0)),
         Registers(),
     )
 
     /**
+     * ```
      * memory[0] = memory[0] + 1
      * memory[1] = memory[1] + 2
-     * Prints memory[1]
+     * Print memory[1]
+     * ```
      */
-    val ADD_1_AND_2_AND_PRINT_SECOND = Example(
+    val EXAMPLE_11 = Example(
         Program("+>++."),
         Memory(byteArrayOf(0, 0)),
         Registers(),

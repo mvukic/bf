@@ -24,13 +24,7 @@ fun getBracketPairs(program: Program): Map<Int, Int> {
     return pairs
 }
 
-
-fun getMemoryPath(args: Array<String>) = args.getOrNull(1)
-
-fun readMemoryFromPathOrDefault(path: String?, default: ByteArray): ByteArray {
-    if (path == null) {
-        return default
-    }
+fun readFileContent(path: String): String {
     val currentPath = Paths.get(".").absolute()
     val memoryPath = currentPath.resolve(path).normalize()
 
@@ -38,9 +32,5 @@ fun readMemoryFromPathOrDefault(path: String?, default: ByteArray): ByteArray {
     if (!memoryFile.isFile) {
         error("File not found at path '$memoryPath'")
     }
-    val memoryContent = memoryFile.readLines().joinToString("").trim()
-    if (memoryContent.isEmpty()) {
-        error("Empty memory")
-    }
-    return memoryContent.split("").map { it.toByte() }.toByteArray()
+    return memoryFile.readLines().joinToString("").trim()
 }

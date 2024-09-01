@@ -87,4 +87,6 @@ class Interpreter(
     fun dumpMemory() = memory.dumpAsString()
 
     fun dumpRegisters() = registers.toString()
+
+    override fun toString() = "Interpreter ${hashCode()}"
 }

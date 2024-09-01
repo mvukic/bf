@@ -12,25 +12,31 @@ class InterpreterTests {
 
     @ParameterizedTest
     @MethodSource("simpleTestCases")
-    fun `Simple test `(index: Int, interpreter: Interpreter, expected: String) {
+    fun `Simple test `(interpreter: Interpreter, expectedMemory: String, expectedOutput: String) {
         interpreter.start()
 
-        val actual = interpreter.dumpMemory()
-        assertEquals(expected, actual)
+        val actualMemory = interpreter.dumpMemory()
+        assertEquals(expectedMemory, actualMemory)
+
+        val actualOutput = interpreter.printer.get()
+        assertEquals(expectedOutput, actualOutput)
     }
 
     companion object {
 
         @JvmStatic
         fun simpleTestCases() = listOf(
-            Arguments.of(0, InterpreterExamples.NO_OP.asInterpreter(logger = NoOpLogger()), ""),
-            Arguments.of(1, InterpreterExamples.ADD_1.asInterpreter(logger = NoOpLogger()), "1"),
-            Arguments.of(2, InterpreterExamples.ADD_2.asInterpreter(logger = NoOpLogger()), "2"),
-            Arguments.of(3, InterpreterExamples.ADD_1_AND_2.asInterpreter(logger = NoOpLogger()), "12"),
-            Arguments.of(4, InterpreterExamples.ADD_1_AND_2_AND_1.asInterpreter(logger = NoOpLogger()), "121"),
-            Arguments.of(5, InterpreterExamples.SUB_1.asInterpreter(logger = NoOpLogger()), "-1"),
-            Arguments.of(6, InterpreterExamples.SUB_ADD_MULTI.asInterpreter(logger = NoOpLogger()), "212"),
-            Arguments.of(7, InterpreterExamples.ADD_FIRST_TO_SECOND.asInterpreter(logger = NoOpLogger()), "01"),
+            Arguments.of(InterpreterExamples.EXAMPLE_1.asInterpreter(logger = NoOpLogger()), "", ""),
+            Arguments.of(InterpreterExamples.EXAMPLE_2.asInterpreter(logger = NoOpLogger()), "1", ""),
+            Arguments.of(InterpreterExamples.EXAMPLE_3.asInterpreter(logger = NoOpLogger()), "2", ""),
+            Arguments.of(InterpreterExamples.EXAMPLE_4.asInterpreter(logger = NoOpLogger()), "12", ""),
+            Arguments.of(InterpreterExamples.EXAMPLE_5.asInterpreter(logger = NoOpLogger()), "121", ""),
+            Arguments.of(InterpreterExamples.EXAMPLE_6.asInterpreter(logger = NoOpLogger()), "-1", ""),
+            Arguments.of(InterpreterExamples.EXAMPLE_7.asInterpreter(logger = NoOpLogger()), "212", ""),
+            Arguments.of(InterpreterExamples.EXAMPLE_8.asInterpreter(logger = NoOpLogger()), "01", ""),
+            Arguments.of(InterpreterExamples.EXAMPLE_9.asInterpreter(logger = NoOpLogger()), "1", "1"),
+            Arguments.of(InterpreterExamples.EXAMPLE_10.asInterpreter(logger = NoOpLogger()), "12", "12"),
+            Arguments.of(InterpreterExamples.EXAMPLE_11.asInterpreter(logger = NoOpLogger()), "12", "2"),
         )
     }
 

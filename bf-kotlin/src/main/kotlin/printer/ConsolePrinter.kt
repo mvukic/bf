@@ -1,5 +1,8 @@
 package com.github.mvukic.printer
 
+/**
+ * A printer implementation that prints all messages to the console.
+ */
 class ConsolePrinter : Printer {
 
     private val stringBuilder = StringBuilder()
