@@ -1,7 +1,7 @@
 package com.github.mvukic.interpreter
 
+import com.github.mvukic.logger.ConsoleLogger
 import com.github.mvukic.logger.Logger
-import com.github.mvukic.logger.NoOpLogger
 import com.github.mvukic.memory.Memory
 import com.github.mvukic.printer.ConsolePrinter
 import com.github.mvukic.printer.Printer
@@ -14,12 +14,12 @@ object InterpreterExamples {
         val program: Program,
         val memory: Memory,
         val registers: Registers,
-        val printer: Printer,
-        val logger: Logger = NoOpLogger()
+        val printer: Printer = ConsolePrinter(),
+        val logger: Logger = ConsoleLogger()
     ) {
 
-        // TODO: Override printer or logger
-        fun asInterpreter() = Interpreter(program, memory, registers, printer, logger)
+        fun asInterpreter(printer: Printer? = null, logger: Logger? = null) =
+            Interpreter(program, memory, registers, printer ?: this.printer, logger ?: this.logger)
     }
 
     /**
@@ -29,7 +29,6 @@ object InterpreterExamples {
         Program(""),
         Memory(byteArrayOf()),
         Registers(),
-        ConsolePrinter()
     )
 
     /**
@@ -39,7 +38,6 @@ object InterpreterExamples {
         Program("+"),
         Memory(byteArrayOf(0)),
         Registers(),
-        ConsolePrinter()
     )
 
     /**
@@ -61,7 +59,6 @@ object InterpreterExamples {
         Program("+>++"),
         Memory(byteArrayOf(0, 0)),
         Registers(),
-        ConsolePrinter()
     )
 
     /**
@@ -75,7 +72,6 @@ object InterpreterExamples {
         Program("+>++>+"),
         Memory(byteArrayOf(0, 0, 0)),
         Registers(),
-        ConsolePrinter()
     )
 
     /**
@@ -85,7 +81,6 @@ object InterpreterExamples {
         Program("-"),
         Memory(byteArrayOf(0)),
         Registers(),
-        ConsolePrinter()
     )
 
     /**
@@ -99,7 +94,6 @@ object InterpreterExamples {
         Program("++++>++>++<<-->-"),
         Memory(byteArrayOf(0, 0, 0)),
         Registers(),
-        ConsolePrinter()
     )
 
     /**
@@ -111,7 +105,6 @@ object InterpreterExamples {
         Program("[->+<]"),
         Memory(byteArrayOf(1, 0)),
         Registers(),
-        ConsolePrinter()
     )
 
     /**
@@ -121,7 +114,6 @@ object InterpreterExamples {
         Program("."),
         Memory(byteArrayOf(0)),
         Registers(),
-        ConsolePrinter()
     )
 
     /**
@@ -134,7 +126,6 @@ object InterpreterExamples {
         Program("+.>++."),
         Memory(byteArrayOf(0, 0)),
         Registers(),
-        ConsolePrinter()
     )
 
     /**
@@ -146,7 +137,6 @@ object InterpreterExamples {
         Program("+>++."),
         Memory(byteArrayOf(0, 0)),
         Registers(),
-        ConsolePrinter()
     )
 
 }
