@@ -1,6 +1,6 @@
 package registers
 
-import com.github.mvukic.register.Registers
+import com.github.mvukic.registers.Registers
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

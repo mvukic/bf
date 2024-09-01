@@ -8,6 +8,6 @@ class Memory(private val memory: ByteArray) {
         memory[pointer] = value
     }
 
-    override fun toString() = memory.joinToString("")
+    fun dumpAsString() = memory.joinToString("")
 
 }

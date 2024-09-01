@@ -1,4 +1,4 @@
-package com.github.mvukic.register
+package com.github.mvukic.registers
 
 data class Registers(
     var instruction: Int = 0,

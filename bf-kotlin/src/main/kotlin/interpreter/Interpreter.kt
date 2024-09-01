@@ -1,22 +1,28 @@
 package com.github.mvukic.interpreter
 
-import com.github.mvukic.Printer
 import com.github.mvukic.getBracketPairs
+import com.github.mvukic.logger.ConsoleLogger
+import com.github.mvukic.logger.Logger
 import com.github.mvukic.memory.Memory
+import com.github.mvukic.printer.NoOpPrinter
+import com.github.mvukic.printer.Printer
 import com.github.mvukic.program.Program
-import com.github.mvukic.register.Registers
+import com.github.mvukic.registers.Registers
 
 class Interpreter(
     private val program: Program,
     private val memory: Memory,
-    private val registers: Registers = Registers()
+    private val registers: Registers = Registers(),
+    val printer: Printer = NoOpPrinter(),
+    private val logger: Logger = ConsoleLogger()
 ) {
 
     fun start() {
+        if (program.length == 0) return
         val brackets = getBracketPairs(program)
 
         while (true) {
-            dumpRegisters()
+            logger.log(dumpRegisters())
             // Read current instruction
             val instruction = program.getInstruction(this.registers.instruction)
 
@@ -42,12 +48,12 @@ class Interpreter(
                 }
 
                 '.' -> {
-                    print(memory.get(this.registers.memory))
+                    printer.add(memory.get(this.registers.memory))
                     this.registers.instruction++
                 }
 
                 ',' -> {
-                    print("Input an ASCII character: ")
+                    logger.log("Input an ASCII character: ")
                     memory.set(this.registers.memory, readln().toByte())
                     this.registers.instruction++
                 }
@@ -78,9 +84,7 @@ class Interpreter(
         }
     }
 
-    fun dumpMemory() = memory.toString()
+    fun dumpMemory() = memory.dumpAsString()
 
-    fun printMemory(printer: Printer) = printer.print(memory)
-
-    fun dumpRegisters() = println(registers)
+    fun dumpRegisters() = registers.toString()
 }
