@@ -1,4 +1,6 @@
-import com.github.mvukic.Memory
+package memory
+
+import com.github.mvukic.memory.Memory
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

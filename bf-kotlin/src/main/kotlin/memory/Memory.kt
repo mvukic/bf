@@ -1,8 +1,4 @@
-package com.github.mvukic
-
-import java.nio.file.Paths
-import kotlin.io.path.absolute
-
+package com.github.mvukic.memory
 
 class Memory(private val memory: ByteArray) {
 

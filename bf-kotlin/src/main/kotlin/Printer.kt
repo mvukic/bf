@@ -1,5 +1,6 @@
 package com.github.mvukic
 
+import com.github.mvukic.memory.Memory
 import java.io.File
 
 interface Printer {
