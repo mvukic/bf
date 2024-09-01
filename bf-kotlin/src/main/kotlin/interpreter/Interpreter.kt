@@ -7,6 +7,8 @@ import com.github.mvukic.memory.Memory
 import com.github.mvukic.printer.NoOpPrinter
 import com.github.mvukic.printer.Printer
 import com.github.mvukic.program.Program
+import com.github.mvukic.reader.Reader
+import com.github.mvukic.reader.StandardInputReader
 import com.github.mvukic.registers.Registers
 
 class Interpreter(
@@ -14,9 +16,11 @@ class Interpreter(
     private val memory: Memory,
     private val registers: Registers = Registers(),
     val printer: Printer = NoOpPrinter(),
+    private val reader: Reader = StandardInputReader(),
     private val logger: Logger = ConsoleLogger()
 ) {
 
+    // TODO: Skip non instruction characters
     fun start() {
         if (program.length == 0) return
         val brackets = getBracketPairs(program)
@@ -29,53 +33,44 @@ class Interpreter(
             when (instruction) {
                 '+' -> {
                     memory.set(this.registers.memory, memory.get(this.registers.memory).inc())
-                    this.registers.instruction++
                 }
 
                 '-' -> {
                     memory.set(this.registers.memory, memory.get(this.registers.memory).dec())
-                    this.registers.instruction++
                 }
 
                 '>' -> {
                     this.registers.memory++
-                    this.registers.instruction++
                 }
 
                 '<' -> {
                     this.registers.memory--
-                    this.registers.instruction++
                 }
 
                 '.' -> {
                     printer.add(memory.get(this.registers.memory))
-                    this.registers.instruction++
                 }
 
                 ',' -> {
                     logger.log("Input an ASCII character: ")
-                    memory.set(this.registers.memory, readln().toByte())
-                    this.registers.instruction++
+                    memory.set(this.registers.memory, reader.read())
                 }
 
                 '[' -> {
                     if (memory.get(this.registers.memory) == 0.toByte()) {
                         this.registers.instruction = brackets[this.registers.instruction] ?: error("Unmatched ']'")
-                    } else {
-                        this.registers.instruction++
                     }
                 }
 
                 ']' -> {
                     if (memory.get(this.registers.memory) != 0.toByte()) {
                         this.registers.instruction = brackets[this.registers.instruction] ?: error("Unmatched '['")
-                    } else {
-                        this.registers.instruction++
                     }
                 }
-
-                else -> this.registers.instruction++
             }
+
+            // Increase instruction pointer
+            this.registers.instruction++
 
             // Halt the program
             if (this.registers.instruction >= program.length) {
@@ -84,7 +79,7 @@ class Interpreter(
         }
     }
 
-    fun dumpMemory() = memory.dumpAsString()
+    fun dumpMemoryAsString() = memory.dumpAsString()
 
     fun dumpRegisters() = registers.toString()
 

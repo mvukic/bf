@@ -15,7 +15,7 @@ class InterpreterTests {
     fun `Simple test `(interpreter: Interpreter, expectedMemory: String, expectedOutput: String) {
         interpreter.start()
 
-        val actualMemory = interpreter.dumpMemory()
+        val actualMemory = interpreter.dumpMemoryAsString()
         assertEquals(expectedMemory, actualMemory)
 
         val actualOutput = interpreter.printer.get()

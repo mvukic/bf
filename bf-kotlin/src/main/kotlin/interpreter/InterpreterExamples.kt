@@ -6,6 +6,8 @@ import com.github.mvukic.memory.Memory
 import com.github.mvukic.printer.ConsolePrinter
 import com.github.mvukic.printer.Printer
 import com.github.mvukic.program.Program
+import com.github.mvukic.reader.Reader
+import com.github.mvukic.reader.StandardInputReader
 import com.github.mvukic.registers.Registers
 
 object InterpreterExamples {
@@ -15,11 +17,19 @@ object InterpreterExamples {
         val memory: Memory,
         val registers: Registers,
         val printer: Printer = ConsolePrinter(),
+        val reader: Reader = StandardInputReader(),
         val logger: Logger = ConsoleLogger()
     ) {
 
-        fun asInterpreter(printer: Printer? = null, logger: Logger? = null) =
-            Interpreter(program, memory, registers, printer ?: this.printer, logger ?: this.logger)
+        fun asInterpreter(printer: Printer? = null, logger: Logger? = null, reader: Reader? = null) =
+            Interpreter(
+                program,
+                memory,
+                registers,
+                printer ?: this.printer,
+                reader ?: this.reader,
+                logger ?: this.logger
+            )
     }
 
     /**
@@ -51,7 +61,6 @@ object InterpreterExamples {
         Program("++"),
         Memory(byteArrayOf(0)),
         Registers(),
-        ConsolePrinter()
     )
 
     /**
