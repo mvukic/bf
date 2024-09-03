@@ -38,7 +38,28 @@ class MemoryTests {
         assertFailsWith<ArrayIndexOutOfBoundsException>("Memory at pointer '2' is null") {
             memory.set(2, 0x1)
         }
+    }
 
+    @Test
+    fun `parse valid memory from input`() {
+        val actual = Memory.fromInput("1,2,3")
+        val expected = Memory(byteArrayOf(0x1, 0x2, 0x3))
+
+        assertEquals(expected.dumpAsString(), actual.dumpAsString())
+    }
+
+    @Test
+    fun `parse invalid memory from input - number does not fit into a byte`() {
+        assertFailsWith<IllegalStateException>("Numbers must be between -128 and 127") {
+            Memory.fromInput("1,299,3")
+        }
+    }
+
+    @Test
+    fun `parse invalid memory from input - not all values are numbers`() {
+        assertFailsWith<IllegalStateException>("'G' is not a number") {
+            Memory.fromInput("1,G,3")
+        }
     }
 
 }

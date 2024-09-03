@@ -162,4 +162,15 @@ object InterpreterExamples {
         Registers(),
     )
 
+    /**
+     * ```
+     * memory[0] = readByte()
+     * Print memory[0]
+     * ```
+     */
+    val EXAMPLE_12 = Example(
+        Program(",."),
+        Memory(byteArrayOf(0x0, 0x0)),
+        Registers(),
+    )
 }

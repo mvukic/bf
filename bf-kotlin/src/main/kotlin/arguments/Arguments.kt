@@ -1,5 +1,6 @@
 package com.github.mvukic.arguments
 
+// TODO: Ability to define input values
 data class Arguments(
     val programPath: String,
     val memory: String?

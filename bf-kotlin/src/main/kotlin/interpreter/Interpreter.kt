@@ -22,13 +22,14 @@ class Interpreter(
 
     // TODO: Skip non instruction characters
     fun start() {
-        if (program.length == 0) return
+        if (program.length == 0) error("Empty program")
         val brackets = getBracketPairs(program)
 
         while (true) {
             logger.log(dumpRegisters())
             // Read current instruction
             val instruction = program.getInstruction(this.registers.instruction)
+            logger.log("Instruction: $instruction")
 
             when (instruction) {
                 '+' -> {
