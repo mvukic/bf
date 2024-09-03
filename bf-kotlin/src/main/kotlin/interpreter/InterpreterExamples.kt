@@ -170,7 +170,7 @@ object InterpreterExamples {
      */
     val EXAMPLE_12 = Example(
         Program(",."),
-        Memory(byteArrayOf(0x0, 0x0)),
+        Memory(byteArrayOf(0x0)),
         Registers(),
     )
 }

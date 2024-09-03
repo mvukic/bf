@@ -23,7 +23,7 @@ fun main(args: Array<String>) {
 //        reader = MockReader(byteArrayOf(0x0))
 //    )
 
-    val interpreter = InterpreterExamples.EXAMPLE_1.asInterpreter(printer = ConsolePrinter(), logger = ConsoleLogger(), reader = MockReader(byteArrayOf(0x0)))
+    val interpreter = InterpreterExamples.EXAMPLE_12.asInterpreter(printer = ConsolePrinter(), logger = ConsoleLogger(), reader = MockReader(byteArrayOf(0x0)))
     interpreter.start()
 
     println("Memory: ${interpreter.dumpMemoryAsString()}")

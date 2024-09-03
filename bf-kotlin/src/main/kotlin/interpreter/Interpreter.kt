@@ -22,7 +22,6 @@ class Interpreter(
 
     // TODO: Skip non instruction characters
     fun start() {
-        if (program.length == 0) error("Empty program")
         val brackets = getBracketPairs(program)
 
         while (true) {
@@ -54,7 +53,9 @@ class Interpreter(
 
                 ',' -> {
                     logger.log("Input an ASCII character: ")
-                    memory.set(this.registers.memory, reader.read())
+                    val value = reader.read()
+                    logger.log("Input: $value")
+                    memory.set(this.registers.memory, value)
                 }
 
                 '[' -> {
