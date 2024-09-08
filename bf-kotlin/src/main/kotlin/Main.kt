@@ -10,14 +10,11 @@ import com.github.mvukic.program.readProgramFromPath
 import com.github.mvukic.reader.MockInputReader
 import com.github.mvukic.reader.StandardInputReader
 
-fun main() {
-    val args = arrayOf(
-        "../"
-    )
+fun main(args: Array<String>) {
     val arguments = Arguments.parse(args)
     val program = Program(readProgramFromPath(arguments.programPath))
-    val memory = arguments.memory?.let { Memory.fromInput(it) } ?: Memory(ByteArray(10))
-    val reader = arguments.inputs?.let { MockInputReader(it.toByteArray()) } ?: StandardInputReader()
+    val memory = arguments.memory?.let { Memory.fromString(it) } ?: Memory(ByteArray(10))
+    val reader = arguments.inputs?.let { MockInputReader.fromString(it) } ?: StandardInputReader()
 
     val interpreter = Interpreter(
         program = program,

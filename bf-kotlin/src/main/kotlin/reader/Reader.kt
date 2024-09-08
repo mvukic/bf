@@ -1,7 +1,9 @@
 package com.github.mvukic.reader
 
-fun interface Reader {
+interface Reader {
 
     fun read(): Byte
+
+    fun readAll(): List<Byte>
 
 }

@@ -1,12 +1,34 @@
 import com.github.mvukic.getBracketPairs
+import com.github.mvukic.getBytesFromString
 import com.github.mvukic.program.Program
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class UtilsTests {
+
+    @Test
+    fun `parse valid bytes from string`() {
+        val actual = getBytesFromString("1,2,3")
+        val expected = byteArrayOf(0x1, 0x2, 0x3)
+
+        assertContentEquals(expected, actual)
+    }
+
+    @Test
+    fun `parse invalid bytes from string - number does not fit into a byte`() {
+        assertFailsWith<IllegalStateException>("Numbers must be between -128 and 127") {
+            getBytesFromString("1,299,3")
+        }
+    }
+
+    @Test
+    fun `parse invalid bytes from string - not all values are numbers`() {
+        assertFailsWith<IllegalStateException>("'G' is not a number") {
+            getBytesFromString("1,G,3")
+        }
+    }
 
     @ParameterizedTest
     @MethodSource("getBracketPairsParams")

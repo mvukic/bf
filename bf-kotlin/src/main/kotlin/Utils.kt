@@ -34,3 +34,14 @@ fun readFileContent(path: String): String {
     }
     return memoryFile.readLines().joinToString("").trim()
 }
+
+
+fun getBytesFromString(value: String): ByteArray {
+    val values = value.split(",")
+    val numbers = values.map { it.toIntOrNull() ?: error("'$it' is not a number") }
+    if (numbers.any { it < -128 || it > 127 }) {
+        error("Numbers must be between -128 and 127")
+    }
+    val bytes = numbers.map { it.toByte() }
+    return bytes.toByteArray()
+}
