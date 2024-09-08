@@ -3,6 +3,7 @@ package interpreter
 import com.github.mvukic.interpreter.Interpreter
 import com.github.mvukic.interpreter.InterpreterExamples
 import com.github.mvukic.logger.NoOpLogger
+import com.github.mvukic.reader.MockInputReader
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -37,6 +38,7 @@ class InterpreterTests {
             Arguments.of(InterpreterExamples.EXAMPLE_9.asInterpreter(logger = NoOpLogger()), "1", "1"),
             Arguments.of(InterpreterExamples.EXAMPLE_10.asInterpreter(logger = NoOpLogger()), "12", "12"),
             Arguments.of(InterpreterExamples.EXAMPLE_11.asInterpreter(logger = NoOpLogger()), "12", "2"),
+            Arguments.of(InterpreterExamples.EXAMPLE_12.asInterpreter(logger = NoOpLogger(), reader = MockInputReader(byteArrayOf(0x1))), "1", "1"),
         )
     }
 

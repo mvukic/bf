@@ -1,5 +1,6 @@
 package com.github.mvukic.interpreter
 
+import com.github.mvukic.InstructionType
 import com.github.mvukic.getBracketPairs
 import com.github.mvukic.logger.ConsoleLogger
 import com.github.mvukic.logger.Logger
@@ -20,9 +21,12 @@ class Interpreter(
     private val logger: Logger = ConsoleLogger()
 ) {
 
-    // TODO: Skip non instruction characters
     fun start() {
         val brackets = getBracketPairs(program)
+
+        if (program.length == 0) {
+            return
+        }
 
         while (true) {
             logger.log(dumpRegisters())
@@ -31,40 +35,40 @@ class Interpreter(
             logger.log("Instruction: $instruction")
 
             when (instruction) {
-                '+' -> {
+                InstructionType.ADD.value -> {
                     memory.set(this.registers.memory, memory.get(this.registers.memory).inc())
                 }
 
-                '-' -> {
+                InstructionType.SUB.value -> {
                     memory.set(this.registers.memory, memory.get(this.registers.memory).dec())
                 }
 
-                '>' -> {
+                InstructionType.RIGHT.value -> {
                     this.registers.memory++
                 }
 
-                '<' -> {
+                InstructionType.LEFT.value -> {
                     this.registers.memory--
                 }
 
-                '.' -> {
+                InstructionType.OUTPUT.value -> {
                     printer.add(memory.get(this.registers.memory))
                 }
 
-                ',' -> {
+                InstructionType.INPUT.value -> {
                     logger.log("Input an ASCII character: ")
                     val value = reader.read()
                     logger.log("Input: $value")
                     memory.set(this.registers.memory, value)
                 }
 
-                '[' -> {
+                InstructionType.LOOP_START.value -> {
                     if (memory.get(this.registers.memory) == 0.toByte()) {
                         this.registers.instruction = brackets[this.registers.instruction] ?: error("Unmatched ']'")
                     }
                 }
 
-                ']' -> {
+                InstructionType.LOOP_END.value -> {
                     if (memory.get(this.registers.memory) != 0.toByte()) {
                         this.registers.instruction = brackets[this.registers.instruction] ?: error("Unmatched '['")
                     }

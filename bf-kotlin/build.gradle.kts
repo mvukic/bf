@@ -5,7 +5,11 @@ plugins {
 }
 
 group = "com.github.mvukic"
-version = "1.0-SNAPSHOT"
+version = "1.0"
+
+base {
+    archivesName = "bf-interpreter"
+}
 
 kotlin {
     jvmToolchain(22)

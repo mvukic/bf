@@ -1,6 +1,6 @@
 package com.github.mvukic.reader
 
-class MockReader(bytes: ByteArray) : Reader {
+class MockInputReader(bytes: ByteArray) : Reader {
 
     private val stack = bytes.toMutableList()
 
