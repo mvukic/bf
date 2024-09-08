@@ -38,7 +38,11 @@ class InterpreterTests {
             Arguments.of(InterpreterExamples.EXAMPLE_9.asInterpreter(logger = NoOpLogger()), "1", "1"),
             Arguments.of(InterpreterExamples.EXAMPLE_10.asInterpreter(logger = NoOpLogger()), "12", "12"),
             Arguments.of(InterpreterExamples.EXAMPLE_11.asInterpreter(logger = NoOpLogger()), "12", "2"),
-            Arguments.of(InterpreterExamples.EXAMPLE_12.asInterpreter(logger = NoOpLogger(), reader = MockInputReader(byteArrayOf(0x1))), "1", "1"),
+            Arguments.of(
+                InterpreterExamples.EXAMPLE_12.asInterpreter(
+                    logger = NoOpLogger(), reader = MockInputReader(byteArrayOf(0x1))
+                ), "1", "1"
+            ),
         )
     }
 

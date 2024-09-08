@@ -27,7 +27,6 @@ dependencies {
 tasks {
     test {
         useJUnitPlatform()
-
     }
 
     wrapper {
